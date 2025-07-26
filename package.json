@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "AI-powered marketplace connecting users with tradesmen using Zeroentropy, Arcade, and Datalog",
   "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
     "client": "cd client && npm start",
-    "build": "cd client && npm run build",
+    "build": "cd client && npm install && npm run build",
     "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build"
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "render-postbuild": "npm run install-client && npm run build"
   },
   "keywords": [
     "ai",

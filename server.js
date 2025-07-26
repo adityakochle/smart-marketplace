@@ -15,6 +15,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('uploads'));
 
+// Serve static files from the React build
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -626,6 +629,11 @@ app.post('/api/analyze', async (req, res) => {
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Smart Marketplace API is running' });
+});
+
+// Catch all handler: send back React's index.html file for any non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 // Start server
